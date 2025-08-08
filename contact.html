@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Contact — Send Email</title>
+  <style>
+    :root{
+      --bg:#0f1724; --card:#0b1220; --muted:#98a0b3; --accent:#7c5cff;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      font-family: Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;
+    }
+    html,body{height:100%}
+    body{
+      margin:0; background:
+      radial-gradient(1200px 600px at -10% 10%, rgba(124,92,255,0.12), transparent 6%),
+      linear-gradient(180deg,#071025 0%, #081226 100%);
+      color:#e6eef8; -webkit-font-smoothing:antialiased;
+      display:flex; align-items:center; justify-content:center;
+      padding:40px;
+    }
+
+    .wrap{
+      width:min(980px,96%); display:grid; gap:24px;
+      grid-template-columns: 1fr 420px;
+      align-items:start;
+    }
+
+    /* Left */
+    .panel{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius); padding:28px; box-shadow: 0 8px 40px rgba(3,6,14,0.6);
+      border: 1px solid rgba(255,255,255,0.03);
+      backdrop-filter: blur(6px);
+    }
+    h1{margin:0 0 8px; font-size:1.6rem; letter-spacing:-0.02em}
+    p.lead{margin:0 0 18px; color:var(--muted)}
+
+    form{display:grid; gap:12px}
+    label{font-size:0.85rem; color:var(--muted); display:block; margin-bottom:6px}
+    input, textarea, select{
+      width:100%; padding:12px 14px; border-radius:10px; border:1px solid rgba(255,255,255,0.045);
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+      color:inherit; outline:none; font-size:0.95rem;
+      transition: box-shadow .18s, transform .12s;
+    }
+    input:focus, textarea:focus, select:focus{
+      box-shadow: 0 6px 30px rgba(124,92,255,0.12);
+      transform: translateY(-2px);
+      border-color: rgba(124,92,255,0.35);
+    }
+    .row{display:flex; gap:12px}
+    .row > *{flex:1}
+
+    textarea{min-height:140px; resize:vertical}
+
+    .actions{display:flex; gap:12px; align-items:center; margin-top:6px}
+    .btn{
+      appearance:none; cursor:pointer; border:0; font-weight:600; padding:12px 16px;
+      border-radius:10px; background:linear-gradient(90deg,var(--accent), #6d8dff);
+      color:white; box-shadow: 0 8px 30px rgba(124,92,255,0.14);
+      transition: transform .12s, box-shadow .12s, opacity .12s;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn.ghost{
+      background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted);
+      box-shadow:none;
+    }
+
+    .or{ color:var(--muted); font-size:0.9rem; margin-left:auto; margin-right:0}
+
+    /* Right - quick contact & preview */
+    .meta{
+      display:flex; flex-direction:column; gap:14px;
+      justify-content:flex-start;
+    }
+    .card{
+      background: var(--card); padding:20px; border-radius:12px; border:1px solid rgba(255,255,255,0.02);
+    }
+    .quick{
+      display:flex; flex-direction:column; gap:12px;
+      align-items:stretch;
+    }
+    .mailto-preview{ font-size:0.92rem; color:var(--muted); white-space:pre-wrap; background:var(--glass); padding:12px; border-radius:8px; min-height:84px; overflow:auto}
+
+    .status{font-size:0.9rem; color:var(--muted);}
+    .success{color:#60d394}
+    .error{color:#ffb4b4}
+
+    .hint{font-size:0.8rem; color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:940px){
+      .wrap{grid-template-columns:1fr; padding-bottom:40px}
+      .or{display:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap" id="contact-root">
+    <section class="panel" aria-labelledby="contact-title">
+      <h1 id="contact-title">Let's build something tgether ✨</h1>
+      <p class="lead"> Your message will be validated before sending.</p>
+
+      <form id="contactForm" novalidate>
+        <!-- Honeypot for bots -->
+        <input type="text" name="hp_name" id="hp_name" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="row">
+          <div>
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="Bakul Ray" required>
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" placeholder="you@atif.com" required>
+          </div>
+        </div>
+
+        <div>
+          <label for="subject">Subject</label>
+          <input id="subject" name="subject" type="text" placeholder="Quick question about a project" required>
+        </div>
+
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Write your message… (2000 char max)" maxlength="2000" required></textarea>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="budget">Budget (optional)</label>
+            <select id="budget" name="budget" aria-label="Budget">
+              <option value="">— choose —</option>
+              <option value="under-2k">Under $2k</option>
+              <option value="2k-10k">$2k–$10k</option>
+              <option value="10k-plus">10k+</option>
+              <option value="not-sure">Not sore</option>
+            </select>
+          </div>
+          <div>
+            <label for="timeline">Timeline (optional)</label>
+            <input id="timeline" name="timeline" type="text" placeholder="e.g. 2 months">
+          </div>
+        </div>
+
+        <div class="actions" role="group" aria-label="Form actions">
+          <button type="submit" class="btn" id="sendBtn">Send message</button>
+          <button type="button" id="mailtoBtn" class="btn ghost">Open in Email Client</button>
+          <span class="or">or</span>
+          <div id="formStatus" class="status" aria-live="polite"></div>
+        </div>
+      </form>
+
+      <p class="hint" style="margin-top:10px">Privacy: we never store emails here. Files/attachments require a server; this form sends text only.</p>
+    </section>
+
+    <aside class="meta">
+      <div class="card">
+        <strong>Quick email preview</strong>
+        <div id="preview" class="mailto-preview" aria-hidden="false">Your email preview will appear here as you type.</div>
+        <div style="display:flex; gap:8px; margin-top:12px; align-items:center;">
+          <button id="copyPreview" class="btn ghost" title="Copy preview">Copy preview</button>
+          <button id="openPreviewMail" class="btn" title="Open preview in email client">Open in mail client</button>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    /* ============================
+       Configuration - edit this
+       ============================ */
+    // If you have an API endpoint (Formspree/Netlify/etc.) set it here. Otherwise leave as null to use mailto fallback.
+    const API_ENDPOINT = null; // e.g. "https://formspree.io/f/xxxxxxxx" or "/api/send-email"
+    const DEST_EMAIL = "mannukhandakar0001@gmail.com"; // default recipient for mailto fallback
+
+    /* ============================
+       Helper utilities
+       ============================ */
+    const el = (id) => document.getElementById(id);
+    const qs = (sel, ctx = document) => ctx.querySelector(sel);
+
+    function encodeMailto({to, subject, body}) {
+      const params = new URLSearchParams();
+      if (subject) params.set("subject", subject);
+      if (body) params.set("body", body);
+      return `mailto:${encodeURIComponent(to)}?${params.toString()}`;
+    }
+
+    function buildBody(data){
+      // Friendly structured email body
+      return [
+        `Hi —`,
+        ``,
+        `${data.message}`,
+        ``,
+        `---`,
+        `From: ${data.name} <${data.email}>`,
+        data.budget ? `Budget: ${data.budget}` : '',
+        data.timeline ? `Timeline: ${data.timeline}` : '',
+        `Sent: ${new Date().toLocaleString()}`,
+      ].filter(Boolean).join("\n");
+    }
+
+    /* ============================
+       Form logic & validation
+       ============================ */
+    const form = el("contactForm");
+    const preview = el("preview");
+    const mailtoBtn = el("mailtoBtn");
+    const copyPreview = el("copyPreview");
+    const openPreviewMail = el("openPreviewMail");
+    const statusEl = el("formStatus");
+    const sendBtn = el("sendBtn");
+    const hp = el("hp_name");
+
+    function showStatus(msg, kind){
+      statusEl.textContent = msg;
+      statusEl.className = 'status ' + (kind || '');
+    }
+
+    function updatePreview(){
+      const data = new FormData(form);
+      const obj = Object.fromEntries(data.entries());
+      if (obj.hp_name) {
+        // honeypot — do not show preview if filled (bot-like)
+        preview.textContent = 'Preview unavailable.';
+        return;
+      }
+      const body = buildBody(obj);
+      preview.textContent = `To: ${DEST_EMAIL}\nSubject: ${obj.subject || '(no subject)'}\n\n${body}`;
+    }
+
+    // initial preview
+    updatePreview();
+
+    form.addEventListener('input', updatePreview);
+
+    // copy preview text
+    copyPreview.addEventListener('click', async () => {
+      try{
+        await navigator.clipboard.writeText(preview.textContent);
+        showStatus('Preview copied to clipboard', 'success');
+      } catch(e){
+        showStatus('Unable to copy - please select and copy manually', 'error');
+      }
+    });
+
+    // open preview in mail client
+    openPreviewMail.addEventListener('click', () => {
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd.entries());
+      const body = buildBody(data);
+      const mailto = encodeMailto({to: DEST_EMAIL, subject: data.subject || '', body});
+      window.location.href = mailto;
+    });
+
+    // Mailto fallback button
+    mailtoBtn.addEventListener('click', () => {
+      const fd = new FormData(form);
+      const data = Object.fromEntries(fd.entries());
+      const body = buildBody(data);
+      const mailto = encodeMailto({to: DEST_EMAIL, subject: data.subject || '', body});
+      window.location.href = mailto;
+    });
+
+    // form submit - either POST to API_ENDPOINT or fallback to mailto
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      showStatus('', '');
+
+      // Client-side validation
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const subject = form.subject.value.trim();
+      const message = form.message.value.trim();
+      const hpVal = hp.value.trim();
+      if (hpVal) {
+        showStatus('Submission rejected (spam suspected).', 'error');
+        return;
+      }
+      if (!name || !email || !subject || !message) {
+        showStatus('Please fill required fields: name, email, subject, message.', 'error');
+        return;
+      }
+      // basic email regex
+      const emailRe = /^[^@]+@[^@]+\.[^@]+$/;
+      if (!emailRe.test(email)) {
+        showStatus('Please enter a valid email address.', 'error');
+        return;
+      }
+
+      // disable UI
+      sendBtn.disabled = true;
+      sendBtn.textContent = 'Sending...';
+
+      const payload = {
+        name, email, subject, message,
+        budget: form.budget.value || null,
+        timeline: form.timeline.value || null,
+        sentAt: new Date().toISOString()
+      };
+
+      try {
+        if (API_ENDPOINT) {
+          // POST JSON to endpoint
+          const res = await fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(payload)
+          });
+          if (!res.ok) throw new Error('Server error: ' + res.status);
+          // expect JSON { ok: true } ideally
+          const json = await res.json().catch(()=>({ok:true}));
+          if (json.ok === false) throw new Error(json.message || 'Sending failed');
+          showStatus('Message sent — thank you!', 'success');
+          form.reset();
+          updatePreview();
+        } else {
+          // No API - fallback to mailto (open client)
+          const body = buildBody(payload);
+          const mailto = encodeMailto({to: DEST_EMAIL, subject: subject, body});
+          window.location.href = mailto;
+          showStatus('Opening your email client...', 'success');
+        }
+      } catch (err) {
+        console.error(err);
+        // graceful fallback - offer mailto when API fails
+        showStatus('Failed to send via API; falling back to opening email client.', 'error');
+        const body = buildBody(payload);
+        const mailto = encodeMailto({to: DEST_EMAIL, subject: subject, body});
+        setTimeout(()=> window.location.href = mailto, 1200);
+      } finally {
+        sendBtn.disabled = false;
+        sendBtn.textContent = 'Send message';
+      }
+    });
+
+    // small accessibility nicety: submit on ctrl+enter in textarea
+    el('message').addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        sendBtn.click();
+      }
+    });
+  </script>
+</body>
+</html>
