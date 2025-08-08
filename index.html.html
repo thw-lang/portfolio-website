@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Atif Irfan - Web Designer</title>
+  <style>
+    :root {
+      --bg: #f4f4f4;
+      --text: #222;
+      --primary: #00bcd4;
+      --card-bg: #fff;
+      --nav-bg: #111;
+    }
+
+    [data-theme="dark"] {
+      --bg: #1e1e1e;
+      --text: #f4f4f4;
+      --primary: #00bcd4;
+      --card-bg: #2c2c2c;
+      --nav-bg: #000;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    header {
+      background: linear-gradient(to right, #1f1f1f, #3a3a3a);
+      color: #fff;
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      background: var(--nav-bg);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    nav h1 {
+      font-size: 24px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .theme-toggle {
+      background: var(--primary);
+      border: none;
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .hero {
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      margin: 20px 0 10px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--primary);
+      color: #fff;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .cta:hover {
+      background: #0194a3;
+    }
+
+    .section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+      animation: fadeUp 1s ease;
+    }
+
+    .timeline li {
+      margin-bottom: 15px;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--card-bg);
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .project-card:hover {
+      transform: scale(1.03);
+      border-color: var(--primary);
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background: var(--card-bg);
+      color: var(--text);
+    }
+
+    form button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #chat-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    #chat-log {
+      height: 200px;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    #chat-log div {
+      margin-bottom: 10px;
+    }
+
+    #user-input {
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-top: 1px solid #ccc;
+      outline: none;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .project-card {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>Atif Irfan</h1>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#companies">Companies</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="theme-toggle" onclick="toggleTheme()">Toggle Theme</button>
+    </nav>
+    <div class="hero">
+      <h2>Hi, I’m Atif Irfan</h2>
+      <p>A 13-year-old Web Designer with 2+ years of experience, certified & founder of multiple companies.</p>
+      <a href="#contact" class="cta">Book a Call</a>
+    </div>
+  </header>
+
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>I started web designing at 11 and have created dozens of clean, professional, and responsive websites. I’m certified, passionate about UI/UX, and always improving.</p>
+  </section>
+
+  <section id="experience" class="section">
+    <h2>Experience & Certifications</h2>
+    <ul class="timeline">
+      <li><strong>2023</strong> - Completed Advanced Web Design Certificate (Google)</li>
+      <li><strong>2022</strong> - Built 10+ full-stack websites for clients</li>
+      <li><strong>2021</strong> - Started freelance work & won design competitions</li>
+    </ul>
+  </section>
+
+  <section id="companies" class="section">
+    <h2>Companies I Run</h2>
+    <ul>
+      <li><strong>PixelLaunch:</strong> Design studio for startups</li>
+      <li><strong>CodeHatch:</strong> E-commerce & app solutions</li>
+      <li><strong>EduNerds:</strong> Coding platform for young learners</li>
+    </ul>
+  </section>
+
+  <section id="projects" class="section">
+    <h2>Featured Projects</h2>
+    <div class="projects-grid">
+      <div class="project-card">🧠 AI-Powered Portfolio Site</div>
+      <div class="project-card">🎨 Redesign for NGO</div>
+      <div class="project-card">🛒 E-commerce Store in React</div>
+      <div class="project-card">📚 Online Learning Platform</div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Let’s Connect</h2>
+    <p>📞 Call me directly: <a href="tel:7577804477">7577804477</a></p>
+    <form onsubmit="handleSubmit(event)">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea rows="4" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <script>
+    // Dark/light theme toggle
+    function toggleTheme() {
+      const currentTheme = document.documentElement.getAttribute("data-theme");
+      document.documentElement.setAttribute("data-theme", currentTheme === "dark" ? "light" : "dark");
+    }
+
+    // Simple contact form
+    function handleSubmit(event) {
+      event.preventDefault();
+      alert("Thanks! Your message has been noted. 📬");
+  </script>
+</body>
+</html>
